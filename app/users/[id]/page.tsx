@@ -1,5 +1,15 @@
 import Users from "@/components/Users";
 import getUser from "../../../lib/getUser";
+import { Metadata } from "next";
+
+export async function generateMetadata({params}: {params: {id: string}}): Promise<Metadata> {
+    const user = await getUser(params.id);
+    return {
+        title: user.name,
+        description: user.email
+    }
+}
+
 
 async function getUsers() {
     console.log("Fetching data from server");

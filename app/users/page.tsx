@@ -1,5 +1,11 @@
 import Link from "next/link";
 import getUsers from "../../lib/getUsers";
+import { Metadata } from "next";
+
+export const metadata:Metadata = {
+    title: 'Users',
+    description: 'This page shows list of users',
+}
 
 export default async function Users() {
     const usersPromise:Promise<any[]> = getUsers();
