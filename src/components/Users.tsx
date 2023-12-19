@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { Suspense } from "react";
+import UserPosts from "./UserPosts";
 
-'use client'
-export default function Users({ users }: { users: any }) {
+export default function Users({ users,promise }: { users: any , promise:any}) {
   return (
     <>
-      <h2>List of Users</h2>
       <p>{users.name}</p>
       <p>{users.email}</p>
+      <Suspense fallback={<div>Loading...</div>}>
+        <UserPosts prmoise={promise} />
+        </Suspense>
     </>
   );
 }

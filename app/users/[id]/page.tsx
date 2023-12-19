@@ -1,6 +1,8 @@
 import Users from "@/components/Users";
 import getUser from "../../../lib/getUser";
 import { Metadata } from "next";
+import { get } from "http";
+import getUserPosts from "../../../lib/getUserPosts";
 
 export async function generateMetadata({params}: {params: {id: string}}): Promise<Metadata> {
     const user = await getUser(params.id);
@@ -29,7 +31,8 @@ export async function generateStaticParams() {
 
 export default async function User({ params }: { params: { id: string } }) {
     const userData: Promise<any> = getUser(params.id);
+    const userPosts: Promise<any> = getUserPosts(params.id);
     const user = await userData;
-    return <Users users={user} />;
+    return <Users users={user} promise={userPosts}/>;
 
 }
